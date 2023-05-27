@@ -1,23 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-
+using DgeHrm3.DAL.Context;
 using DgeHrm3.DAL.Interfaces;
-using DgeHrm3.DAL.Model;
+using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DgeHrm3.DAL.Repository;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {
 
-    protected readonly IDataStoreContext _context;
+    protected readonly DataStoreContext _context;
 
     public IUnitOfWork UnitOfWork => _context;
 
-    public GenericRepository(IDataStoreContext context)
+    public GenericRepository(DataStoreContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using DgeHrm3.DAL.Model;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DgeHrm3.DAL.Configurations;
 
@@ -12,13 +13,13 @@ public class SchoolConfiguration : IEntityTypeConfiguration<School>
         builder.HasOne<School>(s => s.Parent);
 
         builder.Property(s => s.CanTransfer)
-            .HasConversion<string>();
+            .HasConversion<string>(new BoolToStringConverter("N", "Y"));
 
         builder.Property(s => s.Enable)
-            .HasConversion<string>();
+            .HasConversion<string>(new BoolToStringConverter("N", "Y"));
 
         builder.Property(s => s.HasChild)
-            .HasConversion<string>();
+            .HasConversion<string>(new BoolToStringConverter("N", "Y"));
 
         builder.Property( s=>s.Kind)
             .HasConversion(
@@ -29,6 +30,5 @@ public class SchoolConfiguration : IEntityTypeConfiguration<School>
             .HasConversion(
                 v => v.ToString(),
                 v => (SchoolEstablish)Enum.Parse(typeof(SchoolEstablish), v));
-
     }
 }
