@@ -68,7 +68,6 @@ public class Program
             {
                 Console.WriteLine($"{quota}");
             }
-
             var quota2 = context.Quotas.Where(e => e.QutoaId == 9893).FirstOrDefault();
             Console.WriteLine($"{quota2}");
         }
